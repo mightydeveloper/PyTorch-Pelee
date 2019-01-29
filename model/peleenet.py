@@ -24,9 +24,7 @@ class PeleeNet(nn.Module):
         self.classifier = nn.Linear(704, num_classes)
 
     def forward(self, x):
-        for stage in self.stages:
-            x = stage(x)
-            print(x.shape)
+        x = self.stages(x)
         x = self.pool(x)
         x = x.view(x.size(0), -1)
         return self.classifier(x)
